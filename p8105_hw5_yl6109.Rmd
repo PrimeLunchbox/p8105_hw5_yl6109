@@ -1,0 +1,20 @@
+---
+title: "p8105_hw5_yl6109"
+author: "Yurou Liu"
+date: "2025-11-05"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+bd_dup = function(n){
+  if (n <= 0){stop("input must be positive integer")}
+  if (n > 365){return(TRUE)}
+  birthday = sample(1:365, size = n, replace = TRUE)
+  have_dup = any(duplicated(birthdays))
+  return(have_dup)
+}
+```

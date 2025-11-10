@@ -7,14 +7,41 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(purrr)
+library(tidyverse)
 ```
 
 ```{r}
-bd_dup = function(n){
+# write function
+bd_dup = function(n) {
   if (n <= 0){stop("input must be positive integer")}
   if (n > 365){return(TRUE)}
   birthday = sample(1:365, size = n, replace = TRUE)
-  have_dup = any(duplicated(birthdays))
+  have_dup = any(duplicated(birthday))
   return(have_dup)
 }
+
+#simulation
+bd_sim = function(num_of_sim, group_size_min, group_size_max){
+  group_sizes = group_size_min:group_size_max
+  prob = numeric(length(group_sizes))
+  
+  for (i in 1:length(group_sizes)){
+    n = group_sizes[i]
+    result = replicate(num_of_sim, bd_dup(n))
+    prob[i] = mean(result)
+  }
+  
+  result_df = tibble(
+      group_size = group_sizes,
+      probability = prob
+    )
+  return(result_df)
+}
+
+results = bd_sim(10000, 2, 50)
+results %>% 
+  ggplot(aes(x = group_size, 
+             y = probability)) + 
+  geom_col()
 ```

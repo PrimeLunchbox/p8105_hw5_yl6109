@@ -97,7 +97,11 @@ p2_plot_df %>%
        x = "true mean value",
        y = "power", 
        caption = "n = 30, sigma = 5, alpha = 0.05, 5000 simulations for each")
+```
 
+When true mean equals 0, 1, 2, 3, the power increases as true mean (effect size) increases. After true mean reaches 4, the power gets close to 1.
+
+```{r}
 # avg mu hat for total (and avg mu hat in rejected) vs true mean
 p22 = p2_plot_df %>% 
   ggplot(aes(x = mu_true, 

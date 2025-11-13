@@ -54,6 +54,7 @@ results %>%
        y = "prbability")
 ```
 
+According to the result_df and the plot, with group size increasing, the probability of at least two person having same birthday increases and get closer and closer to 1. The increasing rate of probability of at least two person having same birthday (with respect to a unit increase in group size) first increases and then start decreasing at the point where group size is around 25.
 
 ## Problem 2
 
@@ -119,6 +120,7 @@ p23 = p2_plot_df %>%
 combined_plot = p22 + p23
 combined_plot
 ```
+Part of the sample average of mu hat (estimated mean value) across tests for which the null is rejected is not approximately equal to the true value of true mean value, because when null is rejected, it means that the observed result would be unlikely (estimated mean value far from hypothesized value under null(0)) if the null hypothesis was true, especially when true mean is close to null, which leads the sample average of mu hat (estimated mean value) far from true mean.
 
 ## problem 3
 
@@ -133,7 +135,11 @@ homicide_summary = homicide_df %>%
   summarize(total_homicides = n(), 
             unsolved_homicides = sum(disposition %in% c("Closed without arrest", "Open/No arrest"))) %>% 
   print()
+```
 
+The raw data contains 12 variables (uid, reported_date, victim_last, victim_first, victim_race, victim_age, victim_sex, city, state, lat, lon, disposition) and 52179 observations, which shows the homicide cases across 50 cities (28 states) from 2007 to 2017. Victim races include black, Hispanic, white, unknown, other and Asian. Victim ages from 0 to 102.
+
+```{r}
 # prop test for Baltimore and pull values
 btm_df = homicide_summary %>% 
   filter(city == "Baltimore")
@@ -173,3 +179,4 @@ city_results %>%
       caption = "error bars represent the 95% CI") + 
   theme(axis.text.y = element_text(size = 6))
 ```
+
